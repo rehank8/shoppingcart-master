@@ -1,0 +1,149 @@
+<div class="pl2">
+  <div class="card-header " style="display:contents">
+
+    <h3 class="m-2">Products</h3>
+    <div class="row m-2">
+
+      <button type="button" class="form-control btn btn-success col-2" (click)="OnAddModalPopup()">ADD NEW <i class="fa fa-plus" aria-hidden="true"></i></button>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-bordered mt-2">
+        <thead>
+          <tr class="gridbgcolor">
+            <th scope="col">Name</th>
+            <th scope="col">Image</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white">
+          <tr *ngFor="let user of products">
+            <td>{{ user.productName}}</td>
+            <td>{{ user.image }}</td>
+
+            <td>
+              <span title="Edit"><i class="fa fa-pencil-square-o bluepointer" aria-hidden="true"></i></span>
+              <span title="Delete"><i class="fa fa-trash ml-2 redpointer" aria-hidden="true"></i></span>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="d-flex justify-content-between p-2">
+
+
+      <!--<select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshUsers()">
+        <option [ngValue]="2">2 items per page</option>
+        <option [ngValue]="4">4 items per page</option>
+        <option [ngValue]="6">6 items per page</option>
+      </select>-->
+      <ngb-pagination [collectionSize]="collectionSize" [pageSize]="pageSize" (pageChange)="pageChange($event)">
+      </ngb-pagination>
+    </div>
+
+
+    <div id="myModal" class="modal" role="dialog" [style.display]="isShowAddPopup ? 'block' : 'none'">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header popupbgcolor">
+            <h4 style="color:deepskyblue">Products</h4>
+            <h6></h6>
+            <button class="close popupclosecolor" data-dismiss="modal" (click)=" OnClosePopup() ">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" #AddEditForm="ngForm">
+              <div class="form-group">
+                <label class="control-label col">Product Name <span class="text-danger">*</span></label>
+                <div class="col">
+                  <input type="text" class="form-control" name="name" id="name" #name="ngModel" ngModel placeholder="Enter Name">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col">Product Price <span class="text-danger">*</span></label>
+                <div class="col">
+                  <input type="number" class="form-control" name="price" id="price" #price="ngModel" ngModel placeholder="Enter Price">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col">Product Description <span class="text-danger">*</span></label>
+                <div class="col">
+                  <textarea class="form-control" name="description" id="description" #description="ngModel" ngModel placeholder="Enter Description"></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col">Product Color <span class="text-danger">*</span></label>
+                <div class="col">
+                  <input type="text" class="form-control" name="color" id="color" #color="ngModel" ngModel placeholder="Enter Color of product">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col">Brand <span class="text-danger">*</span></label>
+                <div class="col">
+                  <select lass="form-control" #brand="ngModel" [(ngModel)]="product.fKBrandId" id="brand" name="brand" required title="Select Brand">
+                    <option value="" disabled>Select Brand</option>
+                    <option *ngFor="let brand of Brands " [value]="brand.id">{{brand.Name}}</option>
+                  </select>
+                  <!--<div *ngIf="ca.errors && (ca.dirty|| ca.touched)">
+        <span class="ui-form-help ui-feedback ui-feedback-addon ui-feedback-error ui-feedback-body" *ngIf="ca.errors.required" style="color:red">Category is required </span>
+      </div>-->
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col">
+                  <label class="control-label col">Image <span class="text-danger">*</span></label>
+                  <img src="{{image}}" width="190" height="50" name="imgg" />
+                  <input type="file" class="" (change)="fileChange($event)" name="image" id="image" #image="ngModel" ngModel placeholder="Enter Password">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col">Category <span class="text-danger">*</span></label>
+                <div class="col">
+                  <select name="ca" class="form-control" #ca="ngModel" [(ngModel)]="product.fKCategoryId" id="ca" required title="Select Categories" (change)="OnChangeCategories()">
+                    <option value="" disabled>Select category</option>
+                    <option *ngFor="let category of categories " [value]="category.id">{{category.categoryName}}</option>
+                  </select>
+                  <!--<div *ngIf="ca.errors && (ca.dirty|| ca.touched)">
+        <span class="ui-form-help ui-feedback ui-feedback-addon ui-feedback-error ui-feedback-body" *ngIf="ca.errors.required" style="color:red">Category is required </span>
+      </div>-->
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col">Subcategory <span class="text-danger">*</span></label>
+                <div class="col">
+                  <select name="subcat" class="form-control" #subcat="ngModel" [(ngModel)]="product.fKSubCategoryId" id="cat" required title="Select Subcategories">
+                    <option value="" disabled>Select Subcategory</option>
+                    <option *ngFor="let sub of subcategories" [value]="sub.pKSubCategoryId">{{sub.subCategoryName}}</option>
+                  </select>
+                  <!--<div *ngIf="cat.errors && (cat.dirty|| cat.touched)">
+        <span class="ui-form-help ui-feedback ui-feedback-addon ui-feedback-error ui-feedback-body" *ngIf="cat.errors.required" style="color:red">Subcategory is required </span>
+      </div>-->
+                </div>
+
+              </div>
+
+              <div class="form-group col">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" [checked]="isChecked"
+                         (change)="isChecked = !isChecked" id="gridCheck">
+                  <label class="form-check-label" for="gridCheck">
+                    IsActive
+                  </label>
+                </div>
+              </div>
+            </form>
+            <button type="submit" class="btn btn-primary p-20 m-2" (click)="addProduct()">Submit</button>
+            <button type="button" class="btn btn-info p-20 m-2" (click)="resetForm()">Reset</button>
+            <button type="button" class="btn btn-danger p-20 m-2" (click)="OnClosePopup()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+
+

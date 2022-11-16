@@ -1,0 +1,112 @@
+<div class="pl2">
+  <div class="card-header " style="display:contents">
+
+    <h3 class="m-2">Users</h3>
+    <div class="row m-2">
+
+      <button type="button" class="form-control btn btn-success col-2" (click)="OnAddModalPopup()">ADD NEW <i class="fa fa-plus" aria-hidden="true"></i></button>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-bordered mt-2">
+        <thead>
+          <tr class="gridbgcolor">
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">IsActive</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white">
+          <tr *ngFor="let user of users">
+            <td>{{ user.username}}</td>
+            <td>{{ user.emailId }}</td>
+            <td>{{ user.isActive }}</td>
+
+            <td>
+              <span title="Edit"><i class="fa fa-pencil-square-o bluepointer" aria-hidden="true"></i></span>
+              <span title="Delete"><i class="fa fa-trash ml-2 redpointer" aria-hidden="true"></i></span>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="d-flex justify-content-between p-2">
+
+
+      <!--<select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshUsers()">
+        <option [ngValue]="2">2 items per page</option>
+        <option [ngValue]="4">4 items per page</option>
+        <option [ngValue]="6">6 items per page</option>
+      </select>-->
+      <ngb-pagination [collectionSize]="collectionSize" [pageSize]="pageSize" (pageChange)="pageChange($event)">
+      </ngb-pagination>
+    </div>
+
+
+    <div id="myModal" class="modal" role="dialog" [style.display]="isShowAddPopup ? 'block' : 'none'">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header popupbgcolor">
+            <h4 style="color:deepskyblue">Users</h4>
+            <h6></h6>
+            <button class="close popupclosecolor" data-dismiss="modal" (click)=" OnClosePopup() ">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" #AddEditForm="ngForm">
+              <div class="form-group">
+                <div class="col">
+                  <input type="text" class="form-control form-control-lg shadow bg-body rounded" name="username" id="username" #username="ngModel" ngModel placeholder="Enter Name">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col">
+                  <input type="text" class="form-control form-control-lg shadow bg-body rounded" name="password" id="password" #passsword="ngModel" ngModel placeholder="Enter Password">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col">
+                  <input type="text" class="form-control form-control-lg shadow bg-body rounded" name="email" id="email" #email="ngModel" ngModel placeholder="Enter Email">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col">
+                  <input type="text" class="form-control form-control-lg shadow bg-body rounded" name="phone" id="phone" #phone="ngModel" ngModel placeholder="Enter Email">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col">
+                  <input type="text" class="form-control form-control-lg  shadow bg-body rounded" name="role" id="role" #role="ngModel" ngModel placeholder="Enter Role">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col">
+                  <input type="text" class="form-control form-control-lg  shadow bg-body rounded" name="address" id="address" #address="ngModel" ngModel placeholder="Enter Address">
+                </div>
+              </div>
+              <div class="form-group col">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" [checked]="isChecked"
+                         (change)="isChecked = !isChecked" id="gridCheck">
+                  <label class="form-check-label" for="gridCheck">
+                    IsActive
+                  </label>
+                </div>
+              </div>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btnBlue p-20" (click)="addUser()">Submit</button>
+            <button type="button" class="btn btnBlue p-20" (click)="resetForm()">Reset</button>
+            <button type="button" class="btn btnBlue p-20" (click)="OnClosePopup()">Cancel</button>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>

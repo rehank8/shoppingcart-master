@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20211115051912_Added is datatype.cs" />
+    <Compile Remove="Migrations\20211115051912_Added is datatype.Designer.cs" />
+    <Compile Remove="Migrations\20211115052045_Dropped Users and Roles.cs" />
+    <Compile Remove="Migrations\20211115052045_Dropped Users and Roles.Designer.cs" />
+    <Compile Remove="Migrations\20211115052234_Dropped Users and Roles tabels.cs" />
+    <Compile Remove="Migrations\20211115052234_Dropped Users and Roles tabels.Designer.cs" />
+    <Compile Remove="Migrations\20211124170336_Added Is Scecurity column.cs" />
+    <Compile Remove="Migrations\20211124170336_Added Is Scecurity column.Designer.cs" />
+    <Compile Remove="Migrations\20211124172257_Removed all tables.cs" />
+    <Compile Remove="Migrations\20211124172257_Removed all tables.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Amazon.AspNetCore.Identity.Cognito" Version="3.0.0" />
+    <PackageReference Include="Amazon.Extensions.CognitoAuthentication" Version="2.2.2" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.2.3" />
+  </ItemGroup>
+
+</Project>
